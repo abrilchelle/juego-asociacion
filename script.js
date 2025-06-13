@@ -128,17 +128,20 @@ function handleDrop(personName, answerName, dropzone) {
         }, 500);
     }
 
-    // Si todas las asociaciones están correctas
-    if (correctCount === persons.length) {
-        if (currentLevel < levels.length - 1) {
-            messageDiv.textContent = 'Esaaaa! a seguir';
-            nextLevelBtn.textContent = 'Siguiente nivel';
-            nextLevelBtn.classList.remove('hidden');
-        } else {
-            messageDiv.textContent = 'Felicitaciones! podes continuar en el equipo y no serás desvinculado';
-            nextLevelBtn.textContent = 'Jugar de nuevo';
-            nextLevelBtn.classList.remove('hidden');
-        }
+// Si todas las asociaciones están correctas
+if (correctCount === persons.length) {
+    if (currentLevel === 0) {
+        messageDiv.textContent = 'Esaaaa! a seguir';
+        nextLevelBtn.textContent = 'Siguiente nivel';
+        nextLevelBtn.classList.remove('hidden');
+    } else if (currentLevel === 1) {
+        messageDiv.textContent = '¡Excelente! No aflojes, nuestro CEO Ariel Aadjhasjk está observándote';
+        nextLevelBtn.textContent = 'Siguiente nivel';
+        nextLevelBtn.classList.remove('hidden');
+    } else {
+        messageDiv.textContent = 'Felicitaciones! podes continuar en el equipo y no serás desvinculado';
+        nextLevelBtn.textContent = 'Jugar de nuevo';
+        nextLevelBtn.classList.remove('hidden');
     }
 }
 
