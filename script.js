@@ -1,11 +1,11 @@
 // Configuración de personas y respuestas
 const persons = [
-    { name: "Agus", photo: "Agus-foto.png", answers: ["Agus-respuesta.png", "Agus-respuesta2.png", "Agus-respuesta3.png"] },
-    { name: "Lucas", photo: "Lucas-foto.png", answers: ["Lucas-respuesta.png", "Lucas-respuesta2.png", "Lucas-respuesta3.png"] },
-    { name: "Sheryl", photo: "Sheryl-foto.png", answers: ["Sheryl-respuesta.png", "Sheryl-respuesta2.png", "Sheryl-respuesta3.png"] },
-    { name: "Pame", photo: "Pame-foto.png", answers: ["Pame-respuesta.png", "Pame-respuesta2.png", "Pame-respuesta3.png"] },
-    { name: "Sara", photo: "Sara-foto.png", answers: ["Sara-respuesta.png", "Sara-respuesta2.png", "Sara-respuesta3.png"] },
-    { name: "Tini", photo: "Tini-foto.png", answers: ["Tini-respuesta.png", "Tini-respuesta2.png", "Tini-respuesta3.png"] }
+    { name: "Agus", photo: "juego-asociacion/Agus-foto.png", answers: ["juego-asociacion/Agus-respuesta.png", "juego-asociacion/Agus-respuesta2.png", "juego-asociacion/Agus-respuesta3.png"] },
+    { name: "Lucas", photo: "juego-asociacion/Lucas-foto.png", answers: ["juego-asociacion/Lucas-respuesta.png", "juego-asociacion/Lucas-respuesta2.png", "juego-asociacion/Lucas-respuesta3.png"] },
+    { name: "Sheryl", photo: "juego-asociacion/Sheryl-foto.png", answers: ["juego-asociacion/Sheryl-respuesta.png", "juego-asociacion/Sheryl-respuesta2.png", "juego-asociacion/Sheryl-respuesta3.png"] },
+    { name: "Pame", photo: "juego-asociacion/Pame-foto.png", answers: ["juego-asociacion/Pame-respuesta.png", "juego-asociacion/Pame-respuesta2.png", "juego-asociacion/Pame-respuesta3.png"] },
+    { name: "Sara", photo: "juego-asociacion/Sara-foto.png", answers: ["juego-asociacion/Sara-respuesta.png", "juego-asociacion/Sara-respuesta2.png"] },
+    { name: "Tini", photo: "juego-asociacion/Tini-foto.png", answers: ["juego-asociacion/Tini-respuesta.png", "juego-asociacion/Tini-respuesta2.png", "juego-asociacion/Tini-respuesta3.png"] }
 ];
 
 const levels = [0, 1, 2]; // 3 niveles
@@ -149,6 +149,11 @@ nextLevelBtn.addEventListener('click', () => {
         // Reiniciar juego
         currentLevel = 0;
         renderLevel(currentLevel);
+    }
+});
+
+// Inicializar juego
+renderLevel(currentLevel);
     }
 });
 
