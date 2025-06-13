@@ -154,4 +154,3 @@ nextLevelBtn.addEventListener('click', () => {
 
 // Inicializar juego
 renderLevel(currentLevel);
-
