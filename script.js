@@ -5,7 +5,7 @@ const persons = [
     { name: "Sheryl", photo: "juego-asociacion/Sheryl-foto.png", answers: ["juego-asociacion/Sheryl-respuesta.png", "juego-asociacion/Sheryl-respuesta2.png", "juego-asociacion/Sheryl-respuesta3.png"] },
     { name: "Pame", photo: "juego-asociacion/Pame-foto.png", answers: ["juego-asociacion/Pame-respuesta.png", "juego-asociacion/Pame-respuesta2.png", "juego-asociacion/Pame-respuesta3.png"] },
     { name: "Sara", photo: "juego-asociacion/Sara-foto.png", answers: ["juego-asociacion/Sara-respuesta.png", "juego-asociacion/Sara-respuesta2.png"] },
-    { name: "Marti", photo: "juego-asociacion/Marti-foto.png", answers: ["juego-asociacion/Marti-respuesta.png", "juego-asociacion/Marti-respuesta2.png"] },
+    { name: "Marti", photo: "juego-asociacion/Marti-foto.png", answers: ["juego-asociacion/Marti-respuesta.png", "juego-asociacion/Marti-respuesta2-v2.png"], "juego-asociacion/Marti-respuesta3.png" },
     { name: "Tini", photo: "juego-asociacion/Tini-foto.png", answers: ["juego-asociacion/Tini-respuesta.png", "juego-asociacion/Tini-respuesta2.png", "juego-asociacion/Tini-respuesta3.png"] }
 ];
 
