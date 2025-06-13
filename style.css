@@ -1,135 +1,156 @@
-body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+// Configuración de personas y respuestas
+const persons = [
+    { name: "Agus", photo: "juego-asociacion/Agus-foto.png", answers: ["juego-asociacion/Agus-respuesta.png", "juego-asociacion/Agus-respuesta2.png", "juego-asociacion/Agus-respuesta3.png"] },
+    { name: "Lucas", photo: "juego-asociacion/Lucas-foto.png", answers: ["juego-asociacion/Lucas-respuesta.png", "juego-asociacion/Lucas-respuesta2.png", "juego-asociacion/Lucas-respuesta3.png"] },
+    { name: "Sheryl", photo: "juego-asociacion/Sheryl-foto.png", answers: ["juego-asociacion/Sheryl-respuesta.png", "juego-asociacion/Sheryl-respuesta2.png", "juego-asociacion/Sheryl-respuesta3.png"] },
+    { name: "Pame", photo: "juego-asociacion/Pame-foto.png", answers: ["juego-asociacion/Pame-respuesta.png", "juego-asociacion/Pame-respuesta2.png", "juego-asociacion/Pame-respuesta3.png"] },
+    { name: "Sara", photo: "juego-asociacion/Sara-foto.png", answers: ["juego-asociacion/Sara-respuesta.png", "juego-asociacion/Sara-respuesta2.png"] },
+    { name: "Tini", photo: "juego-asociacion/Tini-foto.png", answers: ["juego-asociacion/Tini-respuesta.png", "juego-asociacion/Tini-respuesta2.png", "juego-asociacion/Tini-respuesta3.png"] }
+];
+
+const levels = [0, 1, 2]; // 3 niveles
+let currentLevel = 0;
+let associations = {};
+let correctCount = 0;
+
+const gameDiv = document.getElementById('game');
+const messageDiv = document.getElementById('message');
+const nextLevelBtn = document.getElementById('next-level');
+
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
 }
 
-.container {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    max-width: 900px;
-    width: 100%;
-    text-align: center;
+function renderLevel(level) {
+    associations = {};
+    correctCount = 0;
+    messageDiv.textContent = '';
+    nextLevelBtn.classList.add('hidden');
+    gameDiv.innerHTML = '';
+
+    // Personas (con dropzones)
+    const personsDiv = document.createElement('div');
+    personsDiv.className = 'persons';
+    persons.forEach(person => {
+        const personDiv = document.createElement('div');
+        personDiv.className = 'person';
+
+        const img = document.createElement('img');
+        img.src = person.photo;
+        img.alt = person.name;
+
+        const dropzone = document.createElement('div');
+        dropzone.className = 'dropzone';
+        dropzone.dataset.person = person.name;
+
+        dropzone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropzone.style.background = '#e0e7ff';
+        });
+        dropzone.addEventListener('dragleave', e => {
+            dropzone.style.background = '#fafafa';
+        });
+        dropzone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropzone.style.background = '#fafafa';
+            const answerName = e.dataTransfer.getData('text/plain');
+            handleDrop(person.name, answerName, dropzone);
+        });
+
+        personDiv.appendChild(img);
+        personDiv.appendChild(dropzone);
+
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'person-name';
+        nameDiv.textContent = person.name;
+        personDiv.appendChild(nameDiv);
+
+        personsDiv.appendChild(personDiv);
+    });
+
+    // Respuestas (mezcladas)
+    const answersDiv = document.createElement('div');
+    answersDiv.className = 'answers';
+    const answers = persons.map(person => ({
+        person: person.name,
+        img: person.answers[level]
+    }));
+    shuffle(answers).forEach(answer => {
+        const answerDiv = document.createElement('div');
+        answerDiv.className = 'answer';
+        answerDiv.draggable = true;
+        answerDiv.dataset.person = answer.person;
+
+        const img = document.createElement('img');
+        img.src = answer.img;
+        img.alt = `Respuesta de ${answer.person}`;
+
+        answerDiv.appendChild(img);
+
+        answerDiv.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('text/plain', answer.person);
+            answerDiv.classList.add('dragging');
+        });
+        answerDiv.addEventListener('dragend', e => {
+            answerDiv.classList.remove('dragging');
+        });
+
+        answersDiv.appendChild(answerDiv);
+    });
+
+    gameDiv.appendChild(personsDiv);
+    gameDiv.appendChild(answersDiv);
 }
 
-h1 {
-    margin-bottom: 2rem;
-    color: #333;
-}
+function handleDrop(personName, answerName, dropzone) {
+    // Solo permitir un drop por persona
+    if (dropzone.classList.contains('filled')) return;
 
-#game {
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.persons, .answers {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-    flex: 1;
-}
-
-.person {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 120px;
-}
-
-.person img, .answer img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 3px solid #667eea;
-    background: #f0f0f0;
-    margin-bottom: 0.5rem;
-}
-
-.person .dropzone {
-    width: 100px;
-    height: 100px;
-    border: 2px dashed #aaa;
-    border-radius: 12px;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fafafa;
-}
-
-.person .dropzone.filled {
-    border: 2px solid #4CAF50;
-    background: #eaffea;
-}
-
-.person-name {
-    font-weight: bold;
-    color: #444;
-}
-
-.answers {
-    margin-top: 2rem;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-}
-
-.answer {
-    cursor: grab;
-    transition: transform 0.2s;
-}
-
-.answer.dragging {
-    opacity: 0.5;
-    transform: scale(1.1);
-}
-
-.message {
-    margin-top: 2rem;
-    font-size: 1.3rem;
-    color: #4CAF50;
-    font-weight: bold;
-}
-
-#next-level {
-    margin-top: 1.5rem;
-    padding: 0.8rem 2rem;
-    font-size: 1.1rem;
-    background: #667eea;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-#next-level:hover {
-    background: #4b5fc9;
-}
-
-.hidden {
-    display: none;
-}
-
-@media (max-width: 700px) {
-    #game {
-        flex-direction: column;
-        gap: 1rem;
+    if (personName === answerName) {
+        dropzone.innerHTML = '';
+        const img = document.createElement('img');
+        const person = persons.find(p => p.name === personName);
+        img.src = person.answers[currentLevel];
+        img.alt = `Respuesta de ${personName}`;
+        dropzone.appendChild(img);
+        dropzone.classList.add('filled');
+        associations[personName] = true;
+        correctCount++;
+        // Eliminar la respuesta de la lista
+        const answersDiv = document.querySelector('.answers');
+        const answerDiv = Array.from(answersDiv.children).find(div => div.dataset.person === answerName);
+        if (answerDiv) answerDiv.remove();
+    } else {
+        dropzone.style.background = '#ffeaea';
+        setTimeout(() => {
+            dropzone.style.background = '#fafafa';
+        }, 500);
     }
-    .persons, .answers {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+
+    // Si todas las asociaciones están correctas
+    if (correctCount === persons.length) {
+        if (currentLevel < levels.length - 1) {
+            messageDiv.textContent = 'Esaaaa! a seguir';
+            nextLevelBtn.textContent = 'Siguiente nivel';
+            nextLevelBtn.classList.remove('hidden');
+        } else {
+            messageDiv.textContent = 'Felicitaciones! podes continuar en el equipo y no serás desvinculado';
+            nextLevelBtn.textContent = 'Jugar de nuevo';
+            nextLevelBtn.classList.remove('hidden');
+        }
     }
 }
+
+nextLevelBtn.addEventListener('click', () => {
+    if (currentLevel < levels.length - 1) {
+        currentLevel++;
+        renderLevel(currentLevel);
+    } else {
+        // Reiniciar juego
+        currentLevel = 0;
+        renderLevel(currentLevel);
+    }
+});
+
+// Inicializar juego
+renderLevel(currentLevel);
