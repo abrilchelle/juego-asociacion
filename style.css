@@ -1,0 +1,135 @@
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+#game {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.persons, .answers {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    flex: 1;
+}
+
+.person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.person img, .answer img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #667eea;
+    background: #f0f0f0;
+    margin-bottom: 0.5rem;
+}
+
+.person .dropzone {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #aaa;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+}
+
+.person .dropzone.filled {
+    border: 2px solid #4CAF50;
+    background: #eaffea;
+}
+
+.person-name {
+    font-weight: bold;
+    color: #444;
+}
+
+.answers {
+    margin-top: 2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.answer {
+    cursor: grab;
+    transition: transform 0.2s;
+}
+
+.answer.dragging {
+    opacity: 0.5;
+    transform: scale(1.1);
+}
+
+.message {
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+#next-level {
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    background: #667eea;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#next-level:hover {
+    background: #4b5fc9;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    #game {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .persons, .answers {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
