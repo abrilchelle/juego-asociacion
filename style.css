@@ -131,6 +131,3 @@ h1 {
         gap: 1rem;
     }
 }
-
-// Inicializar juego
-renderLevel(currentLevel);
