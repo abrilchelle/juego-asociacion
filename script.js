@@ -1,6 +1,6 @@
 // Configuración de personas y respuestas
 const persons = [
-    { name: "Agus", photo: "juego-asociacion/Agus-foto.png", answers: ["juego-asociacion/Agus-respuesta.png", "juego-asociacion/Agus-respuesta2.png", "juego-asociacion/Agus-respuesta3.png"] },
+    { name: "Agus", photo: "juego-asociacion/Agus-foto.png", answers: ["juego-asociacion/Agus-respuesta-v2.png", "juego-asociacion/Agus-respuesta2.png", "juego-asociacion/Agus-respuesta3.png"] },
     { name: "Lucas", photo: "juego-asociacion/Lucas-foto.png", answers: ["juego-asociacion/Lucas-respuesta.png", "juego-asociacion/Lucas-respuesta2.png", "juego-asociacion/Lucas-respuesta3.png"] },
     { name: "Sheryl", photo: "juego-asociacion/Sheryl-foto.png", answers: ["juego-asociacion/Sheryl-respuesta.png", "juego-asociacion/Sheryl-respuesta2.png", "juego-asociacion/Sheryl-respuesta3.png"] },
     { name: "Pame", photo: "juego-asociacion/Pame-foto.png", answers: ["juego-asociacion/Pame-respuesta.png", "juego-asociacion/Pame-respuesta2.png", "juego-asociacion/Pame-respuesta3.png"] },
